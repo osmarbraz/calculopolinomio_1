@@ -4,12 +4,20 @@
  * Programa de Pós-Graduação em Ciências da Computação - PROPG
  * Disciplinas: Projeto e Análise de Algoritmos
  * Prof Alexandre Gonçalves da Silva 
+ *
  * Baseado nos slides 85 da aula do dia 25/08/2017 
+ *
  * Cálculo de Polinômio - Exemplo 1
  *
  * Dada uma sequência de números reais an, an−1, . . . , a1, a0, e um 
  * número real x, calcular o valor do polinômio 
  *   Pn(x) = a(n)x^(n) + a(n−1)x^(n−1) + . . . + a1x + a0.
+ *
+ * Atenção:
+ * Vetor em java inicia em 0, os algoritmos consideram início em 1.
+ * A subtraçào de -1 ocorre somente no local de acesso ao vetor ou matriz 
+ * para manter a compatibilidade entre os algoritmos.
+ *
  */
 
 /**
@@ -36,7 +44,7 @@ public class Principal {
         // Quando restar apenas o último coeficiente, 
         // APENAS RETORNA (não é necessário multiplicar - grau de x = 0)
         if (n == 1) {
-            P = A[0];
+            P = A[1-1];
         } else {
             // Elimina recursivamente o primeiro coeficiente da matriz 
             // até que reste apenas um
@@ -44,8 +52,8 @@ public class Principal {
 
             // n termos, grau do polinômio n-1
             // Meio de eliminar o elemento de grau n-1
-            for (int i = 0; i < ALinha.length; i++) {
-                ALinha[i] = A[i + 1];
+            for (int i = 1; i <= ALinha.length; i++) {
+                ALinha[i-1] = A[i + 1 - 1];
             }
             float PLinha = calcularPolinomio(ALinha, x);
             float xn = 1;
@@ -53,10 +61,10 @@ public class Principal {
             for (int i = 1; i <= ALinha.length; i++) {
                 xn = xn * x;
             }
-            //O elemento A[n] fica na posicao A[0]
-            System.out.println("A[n-1]=" + A[0] + " xn=" + xn);
+            //O elemento A[n] fica na posicao A[1]
+            System.out.println("A[n]=" + A[1-1] + " xn=" + xn);
             //Acumula o resultado
-            P = PLinha + A[0] * xn;
+            P = PLinha + A[1-1] * xn;
         }
         return P;
     }
